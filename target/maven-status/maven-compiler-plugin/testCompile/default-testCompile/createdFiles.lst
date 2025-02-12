@@ -1,0 +1,4 @@
+com/example/hooks/Hooks.class
+com/example/stepdefinations/ProductRegistrationSteps.class
+com/example/runner/TestRunner.class
+com/example/aiointegration/ResultUploaderToAIOTest.class
