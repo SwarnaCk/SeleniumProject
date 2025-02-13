@@ -1,4 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: com.example.runner.TestRunner
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 39.98 s -- in com.example.runner.TestRunner
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 171.7 s <<< FAILURE! -- in com.example.runner.TestRunner
+Project Registration with Battery Only.Successful product registration with only a battery -- Time elapsed: 114.4 s <<< ERROR!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for element to be clickable: By.xpath: //td[@data-value='2025-02-13'] (tried for 30 second(s) with 500 milliseconds interval)
+Build info: version: '4.27.0', revision: 'd6e718d134'
+System info: os.name: 'Mac OS X', os.arch: 'aarch64', os.version: '12.7.6', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 133.0.6943.55, chrome: {chromedriverVersion: 133.0.6943.98 (da53563ceb66..., userDataDir: /var/folders/kh/4pkfb3w54j7...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52985}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:52985/devtoo..., se:cdpVersion: 133.0.6943.55, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: bb1a28fbd5c871141dfad491a1318196
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at com.example.utils.ReusableClass.waitForElementClickable(ReusableClass.java:61)
+	at com.example.utils.ReusableClass.click(ReusableClass.java:65)
+	at com.example.Pages.ProjectInfo.selectOperationDate(ProjectInfo.java:88)
+	at com.example.stepdefinations.ProductRegistrationSteps.iFillTheProjectInformationDetails(ProductRegistrationSteps.java:117)
+	at ✽.I fill the project information details(file:///Users/swarnaroy/SeleniumPractice/demo/src/test/resources/features/ProductRegistration.feature:13)
+

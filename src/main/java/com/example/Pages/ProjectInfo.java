@@ -18,9 +18,9 @@ public class ProjectInfo {
     private By addessStateDrpDwn= By.xpath("//select[@name='addessState']");
     private By postalCodeField = By.xpath("//input[@placeholder='Postal Code']");
     private By installationDateCalendar = By.xpath("//input[@name='installationDate']");
-    private By installlationDate= By.xpath("//td[@data-value='2025-01-14']");
+    private By installlationDate= By.xpath("//td[@data-value='2025-02-13']");
     private By operateDateCalendar = By.xpath("//input[@name='operateDate']");
-    private By operateDate= By.xpath("//td[@data-value='2025-01-14']");
+    private By operateDate= By.xpath("//td[@data-value='2025-02-13']");
     private By nextBtn= By.xpath("//button[@title='NavigatetoPurchaseInformation']");
     
 
@@ -78,7 +78,7 @@ public class ProjectInfo {
     public void enterPostalCode(String username) {
         reusable.sendKeys(postalCodeField, username);
     }
-    public void selectInstallationDate() {
+    public void selectInstallationDate(){
         reusable.click(installationDateCalendar);
         reusable.waitForElementVisible(installlationDate);
         reusable.click(installlationDate);
