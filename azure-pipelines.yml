@@ -31,7 +31,11 @@ steps:
     sudo apt-get install -y google-chrome-stable
   displayName: 'Install Chrome'
 
-- task: Maven@3
+- task: MavenAuthenticate@0
+  inputs:
+    artifactsFeeds: 
+
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
