@@ -18,6 +18,12 @@ steps:
     path: $(MAVEN_CACHE_FOLDER)
   displayName: Cache Maven packages
 
+# Create Maven cache directory
+- bash: |
+    mkdir -p $(MAVEN_CACHE_FOLDER)
+    chmod -R 777 $(MAVEN_CACHE_FOLDER)
+  displayName: 'Create Maven Cache Directory'
+
 - task: JavaToolInstaller@0
   inputs:
     versionSpec: '17'
@@ -38,7 +44,7 @@ steps:
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
+    mavenOptions: '-Xmx3072m -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.17'
     jdkArchitectureOption: 'x64'
