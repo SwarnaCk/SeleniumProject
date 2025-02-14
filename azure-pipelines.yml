@@ -1,0 +1,58 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
+  CHROME_VERSION: stable
+
+steps:
+- task: Cache@2
+  inputs:
+    key: 'maven | "$(Agent.OS)" | **/pom.xml'
+    restoreKeys: |
+      maven | "$(Agent.OS)"
+      maven
+    path: $(MAVEN_CACHE_FOLDER)
+  displayName: Cache Maven packages
+
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+
+- script: |
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/sources.list.d/google.list'
+    sudo apt-get update
+    sudo apt-get install -y google-chrome-stable
+  displayName: 'Install Chrome'
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: |
+      **/surefire-reports/TEST-*.xml
+      **/testng-results.xml
+    goals: 'clean package'
+  env:
+    CHROME_BIN: /usr/bin/google-chrome
+    JAVA_HOME: $(JAVA_HOME_17_X64)
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: |
+      **/surefire-reports/TEST-*.xml
+      **/testng-results.xml
+    mergeTestResults: true
+    failTaskOnFailedTests: true
+    testRunTitle: 'Test Results'
